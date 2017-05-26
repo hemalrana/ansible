@@ -1,0 +1,4 @@
+---
+# defaults file
+phpmyadmin_servers:
+  - host: localhost

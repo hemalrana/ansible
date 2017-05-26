@@ -1,0 +1,43 @@
+---
+# tasks file for hemal.phpmyadmin
+- name: "Install phpmyadmin packages"
+  yum: name={{ item }} state=present
+  with_items:
+    - phpmyadmin
+    - httpd
+    - php
+  when: ansible_distribution == 'CentOS'
+  notify:
+    - "Enable Apache"
+    - "Restart Apache"
+
+- name: "Prepare - remove welcome vhost"
+  file:
+    dest: "/etc/httpd/conf.d/welcome.conf"
+    state: absent
+  notify:
+    - "Restart Apache"
+
+- name: "Copy vhost file"
+  copy:
+    src: "../files/vhost.conf"
+    dest: "/etc/httpd/conf.d/phpMyAdmin.conf"
+  when: ansible_distribution == 'CentOS'
+  notify:
+    - "Restart Apache"
+
+- name: "Copy php.ini file"
+  copy:
+    src: "../files/php.ini"
+    dest: "/etc/php.ini"
+  when: ansible_distribution == 'CentOS'
+  notify:
+    - "Restart Apache"
+
+- name: "Copy phpMyAdmin config file"
+  template:
+    src: "../files/config.inc.php.j2"
+    dest: "/etc/phpMyAdmin/config.inc.php"
+    mode: "0640"
+    group: apache
+    owner: root
