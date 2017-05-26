@@ -1,0 +1,7 @@
+# roles/mariadb/vars/Centos.yml
+---
+
+mariadb_service: mariadb
+
+mariadb_config: /etc/my.cnf.d/network.cnf
+mariadb_my_config: ~/.my.cnf

@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: Hemal
+  description: Manage MariaDB on Centos with yum.
+  license: BSD
+  min_ansible_version: 22
+  platforms:
+    - name: EL
+      versions:
+        - 7
+  galaxy_tags:
+    - database
+    - sql
+dependencies: []
