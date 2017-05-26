@@ -34,13 +34,15 @@ host_key_checking = False
 10.0.0.51
 10.0.0.52
 Save it
+
 [hemal@sdf ~]$ vi playbook_sample.yml 
 hosts: target_servers
   become: yes
   become_method: sudo
   roles:
     - hemal.phpmyadmin
-    - mariadb
+    - mariadb
+#Execute playbook
 [hemal@sdf ~]$ ansible-playbook playbook_sample.yml
 
 Assumption
